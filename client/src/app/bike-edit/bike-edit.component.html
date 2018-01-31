@@ -1,0 +1,26 @@
+<mat-card>
+  <form #bikeForm="ngForm" (ngSubmit)="save(bikeForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{bike.name ? 'Edit' : 'Add'}} Bike</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="href" [(ngModel)]="bike.href">
+      <mat-form-field>
+        <input matInput placeholder="Bike Name" [(ngModel)]="bike.name"
+               required name="name" #name>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!bikeForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(bike.href)"
+              *ngIf="bike.href" type="button">Delete</button>
+      <a mat-button routerLink="/bike-list">Cancel</a>
+    </mat-card-actions>
+    <mat-card-footer>
+      <div class="giphy">
+        <img src="{{bike.giphyUrl}}" alt="{{bike.name}}">
+      </div>
+    </mat-card-footer>
+  </form>
+</mat-card>
